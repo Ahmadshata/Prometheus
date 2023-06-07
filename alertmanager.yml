@@ -20,9 +20,9 @@ route:
 receivers:
 - name: 'slack'
   slack_configs:
-  - channel: "alert-test"
+  - channel: "PUT_YOUR_SLACK_CHANNEL_HERE"
     send_resolved: true
-    api_url: 'https://hooks.slack.com/services/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'
+    api_url: 'PUT_YOUR_SLACK_HOOK_HERE'
     icon_url: https://avatars3.githubusercontent.com/u/3380462
     title: |-
      [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ .CommonLabels.alertname }} for {{ .CommonLabels.job }}
