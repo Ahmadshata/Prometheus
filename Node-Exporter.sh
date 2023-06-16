@@ -40,6 +40,12 @@ sudo systemctl daemon-reload
 sudo systemctl enable --now node_exporter
 sudo cp node_exporter.crt /etc/prometheus/
 sudo chown prometheus:prometheus /etc/prometheus/node_exporter.crt
+
+#use the command htpasswd -nBC 10 "" | tr -d ':\n'; echo to enter your new password and the hashed password will be printed on the screen
+#then sudo vi  /etc/node_exporter/config.yml  and add the next lines
+#basic_auth_users:
+#  prometheus: <htpasswd command output>
+
 sudo bash -c "echo -e \"  - job_name: "nodes" \n\
     scheme: https \n\
     tls_config: \n\
@@ -47,7 +53,7 @@ sudo bash -c "echo -e \"  - job_name: "nodes" \n\
          insecure_skip_verify: true \n\
 #    basic_auth: \n\
 #         username: prometheus \n\
-#         password: #Password in plain texet not HASHED \n\
+#         password: #Password you entered in htpasswd command as plain text not HASHED \n\
     static_configs: \n\
        - targets: ["localhost:9100"]\" >> /etc/prometheus/prometheus.yml"
       
